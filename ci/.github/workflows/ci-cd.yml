@@ -1,0 +1,29 @@
+name: CI-CD
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with: python-version: '3.11'
+      - name: Run tests
+        run: |
+          cd lambda/ingest
+          python -m pip install pytest
+          pytest
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      - name: Terraform Init & Apply
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-south-1
+        run: |
+          cd infra
+          terraform init
+          terraform apply -auto-approve
