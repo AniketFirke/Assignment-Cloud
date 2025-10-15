@@ -10,7 +10,7 @@ docs/ — stores the research report and architecture justification documents.
 
 And the README.md, which explains how to deploy and test the pipeline.”
 
-```''```
+```
 
 # package lambda
 cd lambda/ingest
