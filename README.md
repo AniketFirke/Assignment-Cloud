@@ -26,6 +26,7 @@ terraform init
 terraform apply -auto-approve
 
 ```
+```
 event-driven-pipeline/
 ├─ infra/
 │  ├─ main.tf
@@ -46,3 +47,4 @@ event-driven-pipeline/
 │  ├─ 1-Research-Report.docx
 │  └─ 2-Architecture-Justification.pdf
 └─ README.md
+```
